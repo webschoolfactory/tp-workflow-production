@@ -19,7 +19,10 @@
     "less": "~1.6.1",
     "dustjs-linkedin": "~2.0.3",
     "dustjs-helpers": "~1.1.1",
-    "makara": "~0.3.0"
+    "makara": "~0.3.0",
+    "mongoose": "^3.8.8",
+    "baucis": "^0.15.1",
+    "baucis-swagger": "^0.2.5"
   },
   "devDependencies": {
     "mocha": "~1.17.0",
