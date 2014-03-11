@@ -8,6 +8,14 @@ var app = require('../index'),
     request = require('supertest'),
     assert = require('assert');
 
+var mockgoose = require('mockgoose');
+var mongoose = require('mongoose');
+
+mockgoose(mongoose);
+
+beforeEach(function (){
+        mockgoose.reset();
+});
 
 xdescribe('index', function () {
 
