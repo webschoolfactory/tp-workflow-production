@@ -47,6 +47,8 @@ app.requestAfterRoute = function requestAfterRoute(server) {
 
 if (require.main === module) {
     kraken.create(app).listen(function (err) {
+        //startup
+        console.log('Kraken app started in mode ' + process.env.NODE_ENV);
         if (err) {
             console.error(err.stack);
         }

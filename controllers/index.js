@@ -10,22 +10,22 @@ module.exports = function (app) {
     var model = new IndexModel();
 
 
-    app.get('/', function (req, res) {
+    app.get('/', function (req, res, next) {
         
-    	innovation.find(function(err,innovations){
-    		if(err){
-    			next(err);
-    			return;
-    		}
+        innovation.find(function(err,innovations){
+            if(err){
+                next(err);
+                return;
+            }
             console.log('found', innovations.length,'innovations');
-    		model.innovations = innovations;
-        	res.render('index', model);
+            model.innovations = innovations;
+            res.render('index', model);
 
-    	});
+        });
 
-        
 
-        
+
+
     });
 
 };

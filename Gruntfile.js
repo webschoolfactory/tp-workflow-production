@@ -79,15 +79,29 @@ module.exports = function (grunt) {
             'tmp': 'tmp',
             'build': '.build/templates'
         },
-        mochacli: {
-            src: ['test/*.js'],
-            options: {
-                globals: ['chai'],
-                timeout: 6000,
-                ignoreLeaks: false,
-                ui: 'bdd',
-                reporter: 'spec'
-            }
+        mochaTest: {
+                test : {
+                    src: ['test/*Spec.js'],
+                    options: {
+                        globals: ['chai'],
+                        timeout: 6000,
+                        ignoreLeaks: false,
+                        ui: 'bdd',
+                        reporter: 'spec',
+                        require: 'test/blanket'
+                    }
+                },
+                coverage: {
+                    src: ['test/*Spec.js'],
+                    options: {
+                        reporter: 'html-cov',
+                        // use the quiet flag to suppress the mocha console output
+                        quiet: true,
+                        // specify a destination file to capture the mocha
+                        // output (the quiet option does not suppress this)
+                        captureFile: 'test/coverage/coverage-node.html'
+                    }
+                }
         },
         concurrent: {
           dev: {
@@ -147,6 +161,20 @@ module.exports = function (grunt) {
                     stdout: true
                 },
                 command: 'mongod --smallfiles'
+            },
+            deploy: {
+                command: function(){
+                    if (grunt.option.flags().indexOf('--verbose') > -1) {
+                        return 'sh deploy.sh -v';
+                    } else {
+                        return 'sh deploy.sh';
+                    }
+                },
+                options: {
+                    stdout: true,
+                    stderr: true,
+                    failOnError : true
+                }
             }
         }
     });
@@ -163,10 +191,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadTasks('./node_modules/makara/tasks/');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.registerTask('i18n', ['clean', 'makara', 'dustjs', 'clean:tmp']);
     grunt.registerTask('build', ['jshint', 'less',  'copyto', 'i18n']);
-    grunt.registerTask('test', ['jshint', 'mochacli']);
+    grunt.registerTask('test', ['jshint', 'mochaTest']);
+    grunt.registerTask('deploy', ['buuild', 'shell:deploy']);
     grunt.registerTask('default', ['concurrent']);
 
 };
