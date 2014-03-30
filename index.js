@@ -26,7 +26,7 @@ app.configure = function configure(nconf, next) {
 app.requestStart = function requestStart(server) {
     // Run before most express middleware has been registered.
     var ino = baucis.rest('innovation');
-    server.use('/api/innovations',baucis());
+    server.use('/api/v1/innovations',baucis());
 }; 
 
 
