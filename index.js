@@ -27,7 +27,7 @@ app.requestStart = function requestStart(server) {
     // Run before most express middleware has been registered.
     var ino = baucis.rest('innovation');
     server.use('/api/innovations',baucis());
-};
+}; 
 
 
 app.requestBeforeRoute = function requestBeforeRoute(server) {
