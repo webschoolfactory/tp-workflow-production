@@ -12,6 +12,7 @@ module.exports = function (app) {
 
     app.get('/', function (req, res, next) {
         
+        /*
         innovation.find(function(err,innovations){
             if(err){
                 next(err);
@@ -22,8 +23,8 @@ module.exports = function (app) {
             res.render('index', model);
 
         });
-
-
+        */
+        res.render('index', model);
 
 
     });
