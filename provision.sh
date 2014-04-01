@@ -13,10 +13,22 @@
    node –-version
    echo "INSTALL NPM"
    apt-get -qq -y install npm
+   echo "INSTALL MONGODB"
+   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+   echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+   apt-get update
+   apt-get install mongodb-10gen
    echo "INSTALL GIT"
    apt-get -qq -y install git
    echo "INSTALL VIM"
    apt-get -qq -y install vim
+   echo "INSTALL NPM MODULES"
+   npm config set tmp='/tmp'
+   npm install -g grunt-cli bower karma
+   echo "SET DB PATH"
+   mkdir /data/
+   mkdir /data/db
+   chmod 777 /data/db
    echo "Done!"
  else
    echo "already installed flag set : /home/vagrant/already-installed-flag"
