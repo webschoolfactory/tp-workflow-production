@@ -10,7 +10,6 @@
    add-apt-repository ppa:chris-lea/node.js
    apt-get update
    apt-get -qq install nodejs
-   node –-version
    echo "INSTALL NPM"
    apt-get -qq -y install npm
    echo "INSTALL MONGODB"
@@ -29,6 +28,8 @@
    mkdir /data/
    mkdir /data/db
    chmod 777 /data/db
+   echo "NPM INSTALL"
+   cd /vagrant && npm install --no-bin-links 
    echo "Done!"
  else
    echo "already installed flag set : /home/vagrant/already-installed-flag"
